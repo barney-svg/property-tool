@@ -11,20 +11,29 @@
     const marketCard = document.getElementById('marketCard');
     const methodology = document.querySelector('.methodology-card');
     const nav = document.querySelector('.result-nav');
+    const overviewLink = nav?.querySelector('a[href="#overview"], a[data-overview-link]');
+    const soldLink = nav?.querySelector('a[href="#sold-comps"]');
+    const marketLink = nav?.querySelector('a[href="#marketCard"]');
+
+    if (overviewLink) {
+      overviewLink.dataset.overviewLink = '1';
+      overviewLink.href = enabled ? '#property-profile' : '#overview';
+      overviewLink.textContent = enabled ? 'Property' : 'Overview';
+    }
 
     if (enabled) {
       estimateCard?.classList.add('hidden');
       soldCard?.classList.add('hidden');
       marketCard?.classList.add('hidden');
       methodology?.classList.add('hidden');
-      nav?.querySelector('a[href="#sold-comps"]')?.classList.add('hidden');
-      nav?.querySelector('a[href="#marketCard"]')?.classList.add('hidden');
+      soldLink?.classList.add('hidden');
+      marketLink?.classList.add('hidden');
     } else {
       estimateCard?.classList.remove('hidden');
       soldCard?.classList.remove('hidden');
       methodology?.classList.remove('hidden');
-      nav?.querySelector('a[href="#sold-comps"]')?.classList.remove('hidden');
-      nav?.querySelector('a[href="#marketCard"]')?.classList.remove('hidden');
+      soldLink?.classList.remove('hidden');
+      marketLink?.classList.remove('hidden');
       // marketCard is intentionally not force-shown here; normal comparable rendering controls it.
     }
   }
