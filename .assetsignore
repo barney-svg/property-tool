@@ -1,6 +1,13 @@
 _worker.js
 worker-v2.js
+worker-v3.js
+access-v3.js
+data-v3.js
 wrangler.jsonc
 README.md
 .git
 .github
+*.before.*
+enhancements.js
+precision-fix.js
+pro-upgrades.js
