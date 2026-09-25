@@ -1,9 +1,23 @@
 {
   "name": "property-tool",
   "compatibility_date": "2026-09-25",
-  "main": "./worker-v2.js",
+  "main": "./worker-v3.js",
   "assets": {
     "directory": ".",
     "binding": "ASSETS"
-  }
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "ACCESS_REGISTRY",
+        "class_name": "AccessRegistry"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "access-v1",
+      "new_sqlite_classes": ["AccessRegistry"]
+    }
+  ]
 }
