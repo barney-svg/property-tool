@@ -45,7 +45,7 @@
     clearError();const value=String($('searchInput')?.value||'').trim();if(!value){showError(state.mode==='rightmove'?'Paste a Rightmove property link.':'Enter a property address.');return;}
     const rm=/rightmove\.co\.uk\/properties\/\d+/i.test(value);if(rm&&state.mode!=='rightmove'){setMode('rightmove');$('searchInput').value=value;}
     if(rm||state.mode==='rightmove'){
-      resetResults();setLoading(true,'Rightmove link recognised','Loading the listing now — deeper matching will continue after it appears.');setStatus('Working','loading');renderSuggestions([]);prefetchRightmove(value);
+      resetResults();setLoading(true,'Rightmove link recognised','Loading the listing now — deeper matching will continue after it appears.');setStatus('Link recognised','loading');renderSuggestions([]);prefetchRightmove(value);const rid=value.match(/rightmove\.co\.uk\/properties\/(\d+)/i)?.[1]||'';const pending={url:value,displayAddress:rid?`Rightmove property ${rid}`:'Rightmove property',postcode:'',epcRating:'',squareFootage:null};const pendingManual={lat:0,lon:0,display_name:pending.displayAddress,address:{}};showImmediateProperty(pendingManual,pending);
       try{const listing=await readRightmoveLink(value);state.listing=listing;const manual=manualFromListing(listing);state.selected=manual;showImmediateProperty(manual,listing);setLoading(false);analyse(manual,listing,{progressive:true});queueMicrotask(()=>enrichRightmove(listing,manual,value,state.analysisToken));}
       catch(error){setLoading(false);showError(error?.message||'Could not read that Rightmove link.');setStatus('Error','bad');}return;
     }
