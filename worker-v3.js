@@ -1,3 +1,4 @@
+// Deployment trigger: access-control routing must run before static assets.
 import workerV2 from './worker-v2.js';
 import {AccessRegistry,accessState,handleAdmin,accessLoginPage,accessBlockedPage,json} from './access-v3.js';
 import {addressQuick,subjectEpc,marketComps} from './data-v3.js';
