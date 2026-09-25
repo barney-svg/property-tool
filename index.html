@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#111827" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Property Tool" />
+  <title>Property Tool</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <h1>Property Tool</h1>
+        <p>Search an address or paste a Rightmove link.</p>
+      </div>
+      <span class="status-pill" id="appStatus">Ready</span>
+    </header>
+
+    <section class="search-card">
+      <div class="mode-tabs" role="tablist">
+        <button class="mode-tab active" data-mode="address" type="button">Address</button>
+        <button class="mode-tab" data-mode="rightmove" type="button">Rightmove link</button>
+      </div>
+
+      <form id="searchForm">
+        <label id="inputLabel" for="searchInput">Property address</label>
+        <div class="search-row">
+          <input id="searchInput" autocomplete="street-address" autocapitalize="words" placeholder="e.g. 8 Upton Avenue, St Albans, AL3 5EW" />
+          <button class="primary" id="searchButton" type="submit">Search</button>
+        </div>
+      </form>
+      <div id="suggestions" class="suggestions hidden"></div>
+      <p class="helper" id="helperText">Include the postcode where possible for the strongest match.</p>
+    </section>
+
+    <section id="loadingCard" class="card hidden">
+      <div class="loader"></div>
+      <div>
+        <strong id="loadingTitle">Checking property…</strong>
+        <p id="loadingText">Finding the address and nearby evidence.</p>
+      </div>
+    </section>
+
+    <section id="errorCard" class="card error hidden"></section>
+
+    <section id="results" class="results hidden">
+      <article class="hero-card">
+        <div>
+          <p class="eyebrow">Estimated value</p>
+          <div class="estimate" id="estimateMid">—</div>
+          <div class="range" id="estimateRange">—</div>
+        </div>
+        <div class="confidence" id="confidence">—</div>
+      </article>
+
+      <article class="card">
+        <div class="section-head">
+          <h2 id="propertyAddress">Property</h2>
+          <a id="sourceLink" class="text-link hidden" target="_blank" rel="noopener">Open listing</a>
+        </div>
+        <div class="facts" id="facts"></div>
+      </article>
+
+      <article class="card">
+        <h2>Why this estimate</h2>
+        <div id="explanation" class="copy"></div>
+      </article>
+
+      <article class="card">
+        <div class="section-head"><h2>Sold comparables</h2><span id="compCount" class="muted"></span></div>
+        <div id="comparables" class="comparables"></div>
+      </article>
+
+      <article class="card hidden" id="marketCard">
+        <div class="section-head"><h2>Current market</h2><span class="muted">Rightmove</span></div>
+        <div id="marketListings" class="comparables"></div>
+      </article>
+    </section>
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>
