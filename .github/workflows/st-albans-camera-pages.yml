@@ -1,0 +1,37 @@
+name: Deploy St Albans Camera Viewer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'uk-live-traffic-cameras/**'
+      - '.github/workflows/st-albans-camera-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "st-albans-camera-pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload camera viewer
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./uk-live-traffic-cameras
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
